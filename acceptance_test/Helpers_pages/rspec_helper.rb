@@ -1,7 +1,5 @@
-
-
-
-
+require_relative 'globalized'
+include Globalized
 
 ## declare an exclusion filter.. using this tags exclusion filter individual test can be run.
 RSpec.configure do |c|

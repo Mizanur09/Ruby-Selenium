@@ -1,15 +1,8 @@
-require_relative '../module/DriverUtility'
+require_relative '../Helpers_pages/globalized'
 
 
 module ContactsUtility
-  include DriverUtility
-
-  def helper_get_TestPatientID
-    @TEST_PATIENT_ID = "PATIENT_ID"
-    return @TEST_PATIENT_ID
-  end
-  
-  def helper_setTestDates
+  include Globalized
 
     @today = getDateNthDaysAgo(0, "%m/%d/%Y")
     @tomorrow = getDateNthDaysFromNow(1, "%m/%d/%Y")
@@ -27,6 +20,15 @@ module ContactsUtility
     @twentyfiveDaysAgo = getDateNthDaysAgo(25, "%m/%d/%Y")
     @twentyDaysAgo = getDateNthDaysAgo(20, "%m/%d/%Y")
 
-
+  def getDateNthDaysAgo(numberOfDaysAgo, formatStr)
+    dateNthDaysAgo = numberOfDaysAgo.day.ago.strftime(format=formatStr)
+    return dateNthDaysAgo
   end
+
+  def getDateNthDaysFromNow(numberOfDaysFromNow, formatStr)
+    dateNthDaysFromNow = numberOfDaysFromNow.day.from_now.strftime(format=formatStr)
+
+    return dateNthDaysFromNow
+  end
+
 end
