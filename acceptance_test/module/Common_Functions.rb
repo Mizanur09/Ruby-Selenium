@@ -55,6 +55,27 @@ module Functions
     end
   end
 
+  def isElementVisible(locator)
+    begin
+      element = find(locator)
+      return element.displayed?
+    rescue Exception=>e
+      return false
+    end
+  end
+
+  def wait_for_element_to_load(locator)
+    sleep 1
+    puts "Waiting for this locator to be visible on the page: #{locator}"
+    if isElementVisible(locator)
+      return true
+    else
+      raise Selenium::WebDriver::Error::NoSuchElementError
+    end
+    sleep 1
+  end
+
+
   def verify_text_is_visible(locator, text)
     wait_for_element_to_load(locator)
     puts "Verifying this text: #{text} does display for this locator: #{locator} "
@@ -95,6 +116,10 @@ module Functions
   def scrollIntoElement(elementId)
     s = "document.getElementById('#{elementId}').scrollIntoView(true);"
     @driver.execute_script(s)
+  end
+
+  def removeJumpScreen
+    @driver.execute_script("$('.container-fluid').css('overflow', 'visible');")
   end
 
 

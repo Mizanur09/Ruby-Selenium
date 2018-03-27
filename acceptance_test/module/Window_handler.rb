@@ -57,6 +57,11 @@ module WindowHandler
     @driver.navigate().refresh()
   end
 
+  def resetBrowserView()
+    @driver.execute_script("$('.container-fluid').css('height', '0');")
+    sleep 1
+    @driver.execute_script("$('.container-fluid').css('height', 'inherit');")
+  end
 
 
 end
