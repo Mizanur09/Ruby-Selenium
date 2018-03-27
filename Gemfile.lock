@@ -49,16 +49,8 @@ GEM
       bson_ext
       mongo
     multi_json (1.13.1)
-    net-http-persistent (2.9.4)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
-    page-object (1.2.2)
-      net-http-persistent (~> 2.9.4)
-      page_navigation (>= 0.9)
-      selenium-webdriver (>= 2.53.0)
-      watir-webdriver (>= 0.6.11, < 0.9.9)
-    page_navigation (0.10)
-      data_magic (>= 0.22)
     power_assert (1.1.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
@@ -90,8 +82,6 @@ GEM
       thread_safe (~> 0.1)
     uuid (2.3.8)
       macaddr (~> 1.0)
-    watir-webdriver (0.9.3)
-      selenium-webdriver (>= 2.46.2)
     websocket (1.2.5)
     yml_reader (0.7)
 
@@ -113,7 +103,6 @@ DEPENDENCIES
   mongo (~> 2.4.1)
   mongo-import
   nokogiri
-  page-object
   require_all
   rspec (~> 2.14.1)
   rspec-expectations (~> 2.14.5)

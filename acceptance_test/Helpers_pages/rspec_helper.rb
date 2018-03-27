@@ -9,11 +9,13 @@ RSpec.configure do |c|
   c.filter_run_excluding :smoketest => true
 end
 
+PathOfThe_result = "~/Ruby-Selenium/allure-report/allure_results"
+
 RSpec.configure do |config|
   config.include AllureRSpec::Adaptor
 end
 
 AllureRSpec.configure do |config|
-  config.output_dir = File.join(Dir.home(), "~/Ruby-Selenium/allure-report/allure_results") # add the path where you want to export the data.
+  config.output_dir = File.join(Dir.home(),PathOfThe_result) # add the path where you want to export the data.
   config.clean_dir = true
 end

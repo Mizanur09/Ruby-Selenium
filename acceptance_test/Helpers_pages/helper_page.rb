@@ -11,7 +11,6 @@ require 'date'
 require 'time'
 
 # require 'mysql'
-
 require 'net/http'
 require 'rexml/document'
 require 'jquery'
@@ -21,5 +20,5 @@ require 'mongo-import'
 require 'bson'
 require 'data_magic'
 
-include TypeaheadSelectionList
+# include TypeaheadSelectionList
 include RSpec::Expectations

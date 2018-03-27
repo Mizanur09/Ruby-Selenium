@@ -4,17 +4,15 @@ include Globalized
 
 module Functions
 
-
-
-  def waitForElementPresent(h, w, waitTime = THE_TIMES)
-    sleep 2
+  def waitForElementPresent(how, what, waitTime = THE_TIMES)
+    sleep 1
     puts waitTime
-    if isElementPresent?(h, w)
+    if isElementPresent?(how, what)
       return true
     else
       raise Selenium::WebDriver::Error::NoSuchElementError
     end
-    sleep 2
+    sleep 1
   end
 
   def waitForPageToLoad(title, what='title') # 'navbar-brand')
