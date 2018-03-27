@@ -36,6 +36,20 @@ module DriverUtility
     @driver.quit
     expect(@verification_errors).to eq([])
   end
+
+  ## the following methods work when Loading Spinner present in the website.
+  def waitForLoader
+    element = @driver.find_element(:css, 'html')
+    45.times {
+      if !element.attribute('css').include?('.ui-loading') # provide the loader class
+        return
+      else
+        sleep 1
+      end
+    }
+    raise 'Loading Spinner Timeout'
+  end
+
  end
 
 
