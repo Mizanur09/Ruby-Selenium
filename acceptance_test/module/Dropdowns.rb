@@ -9,7 +9,22 @@ module DropdownFunctions
     return option.attribute('value')
   end
 
-
+  def areAllTheseValuesAvailableInDropDown(cssPath, valueString)
+    verifiedTrue = true
+    select = findElement(:css, cssPath)
+    options = select.find_elements(:tag_name, "option")
+    options.each do |option|
+      displayedValue = option.attribute('value')
+      if displayedValue == nil then
+        displayedValue = "Select"
+      end
+        if valueString.include?(displayedValue) == false then
+          verifiedTrue = false
+          break
+        end
+    end
+      return verifiedTrue
+  end
 
 
 
