@@ -6,12 +6,14 @@ module Globalized
   require_relative '../module/ContactsUtility'
   require_relative '../module/DriverUtility'
   require_relative '../module/Window_handler'
+  require_relative '../module/WaitModule'
 
   ## include all the module below,
   include Functions
   include ContactsUtility
   include DriverUtility
   include WindowHandler
+  include WAIT_FUNCTION
 
 
   ## require all the pages below,
