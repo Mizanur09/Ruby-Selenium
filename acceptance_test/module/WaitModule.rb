@@ -3,7 +3,14 @@ include Globalized
 
 module WAIT_FUNCTION
 
-LOADER_ELEMENT = ''
+LOADER_ELEMENT = '' # pass the loading element
+
+# set Implicitly wait time below,
+IMPLICIT_WAIT_FOR_WEB_ELEMENT = 30
+WAIT_FOR_PAGE_ELEMENT_DEFAULT = 15
+EULA_WAIT_4_DSLOGON = 30
+IMPLICIT_WAIT_FOR_WEB_ELEMENT_DEFAULT = 15
+NUMBER_TRIES = 1
 
 # wait until the element is present
   def waitForElementPresent(how, what, waitTime = THE_TIMES)
