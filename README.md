@@ -15,7 +15,7 @@
 		* gem 'selenium-webdriver', '~>2.53.0'
 		* gem 'rspec', '~> 2.14.1'
 		* gem 'allure-rspec', '~> 0.5.0
-		
+
 	 * Run installetion 
 		* gem install bundler
 		* gem install bundle
@@ -26,3 +26,7 @@ Check your ruby, bundler and bundle files and path
 		* bundler -v (should show current version)
 		* which bundle (should show the path)
 		* bundle -v (should show current version)
+
+
+
+		
