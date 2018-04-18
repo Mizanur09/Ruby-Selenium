@@ -22,5 +22,5 @@ gem 'require_all'
 gem 'allure-rspec', '~> 0.5.0'
 gem 'uuid'
 gem 'mimemagic'
-#djsdhjah
+
 # Note : anything with ~> sign will update as you do bundle update.
