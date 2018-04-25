@@ -3,6 +3,15 @@ include Globalized
 
 module WAIT_FUNCTION
 
+LOADER_ELEMENT = '' # pass the loading element
+
+# set Implicitly wait time below,
+IMPLICIT_WAIT_FOR_WEB_ELEMENT = 30
+WAIT_FOR_PAGE_ELEMENT_DEFAULT = 15
+EULA_WAIT_4_DSLOGON = 30
+IMPLICIT_WAIT_FOR_WEB_ELEMENT_DEFAULT = 15
+NUMBER_TRIES = 1
+
 # wait until the element is present
   def waitForElementPresent(how, what, waitTime = THE_TIMES)
     sleep 1
@@ -61,7 +70,7 @@ module WAIT_FUNCTION
   def waitForLoader
     element = @driver.find_element(:css, 'html')
     45.times {
-      if !element.attribute('css').include?('.ui-loading') # provide the loader class
+      if !element.attribute('css').include?(PAGELOADER_ELEMENT) # provide the loader class
         return
       else
         sleep 1
