@@ -72,6 +72,24 @@ module Functions
     return element
   end
 
+  # Move to the right from modal (Pop-up)
+  def moveArrowInputRangeToRight(how,element, numberOfArrowMove)
+    findElement(how,element).send_keys :tab
+    sleep 1
+    for i in 1..numberOfArrowMove
+      findElement(how, element).send_keys :arrow_right
+      sleep 1
+    end
+  end
+
+  def moveArrowInputRangeToLeft(how,element, numberOfArrowMove)
+    findElement(how, element).send_keys :tab
+    sleep 0.5
+    for i in 1..numberOfArrowMove
+      findElement(how, element).send_keys  :arrow_left
+      sleep 0.5
+    end
+  end
 
 
 end
