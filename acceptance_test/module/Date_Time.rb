@@ -94,7 +94,7 @@ class DateSetup
     end
   end
 
-  # Force the time to change Using Java script
+  # Change the time Using Java script
   def selectTimeZone(timeZone)
   #puts "Time Zone is " + timeZone
   # *selectTimeZone("(-05:00) America/New_York (Eastern)")
@@ -102,6 +102,26 @@ class DateSetup
   @driver.execute_script("$('[name=timeZone]').scope().preferences.timeZone = \"" + timeZone + "\"")
   @driver.execute_script("$('[name=timeZone]').scope().$digest()")
 end
+
+  # Get local time.
+  def getTodayInZeroTime
+    a = Time.now.to_a
+    a[0] = 0
+    a[1] = 0
+    a[2] = 0
+    return Time.local(*a)
+  end
+  # Get UTC time
+  def getTodayInZeroTimeUTC
+    # Get current time into array
+    # format is [sec,min,hour,day,month,year,wday,yday,isdst,zone]
+    a = Time.now.utc.to_a
+    # Zero out sec, min, hrs positions
+    a[0] = 0
+    a[1] = 0
+    a[2] = 0
+    return Time.utc(*a)
+  end
 
 
 
