@@ -9,6 +9,8 @@ module DropdownFunctions
     return option.attribute('value')
   end
 
+#Provide the Element here and then list of the value that you want to verify
+#* expect(areAllTheseValuesAvailableInDropDown("Element", "Select,Normal,Abnormal")).to eq(true)
   def areAllTheseValuesAvailableInDropDown(cssPath, valueString)
     verifiedTrue = true
     select = findElement(:css, cssPath)
@@ -26,19 +28,6 @@ module DropdownFunctions
       return verifiedTrue
   end
 
-  # it will un check the redio button
-  def unCheckRedioButton(fieldName)
-    case getFieldType(fieldName)
-      when "checkbox", "radio"
-        puts "TODO"
-      when "select"
-        setSelectField(fieldName, "")
-      else
-        getField(fieldName).clear
-    end
-    waitForLoader
-  end
-
   # Collect all the dropdown value
   def getDownValues(fieldName)
     #puts "Type is [#{type}]"
@@ -53,13 +42,15 @@ module DropdownFunctions
     return values
   end
 
-  # Return value text
+  # Return value text from the dropdown box.
   def getSelectBoxText(css_element)
     select = Selenium::WebDriver::Support::Select.new(@driver.find_element(:css,  css_element))
     return select.first_selected_option.text()
   end
 
-  # set drop down value by text. [pass the field element(css) and desire value text(String)]
+  # Set drop down value by text.
+  #* [pass the field element(css)
+  #* Pass the desire value text(String)]
   def setSelectBoxValue(selector, value)
     field = findElement(:css, selector)
     if field != nil

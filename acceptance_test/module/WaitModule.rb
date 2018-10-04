@@ -54,7 +54,9 @@ NUMBER_TRIES = 1
     end
     found.should == true
   end
-  
+
+  # This following methods with loading the css of the particular elements.
+  #* Name the element here (Css, Xpath, ID ..)
   def wait_for_element_to_load(locator)
     sleep 1
     puts "Waiting for this locator to be visible on the page: #{locator}"
