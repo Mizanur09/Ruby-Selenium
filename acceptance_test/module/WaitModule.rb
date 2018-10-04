@@ -24,6 +24,11 @@ NUMBER_TRIES = 1
     sleep 1
   end
 
+  # Wait for the given element
+  def waitforCssAttributeToLoad(cssAttribute)
+    !30.times{ break if (isElementVisible(:css, cssAttribute) == true); sleep 0.5 }
+  end
+
   # wait until the page loading is done. as soon as page title present it will stop.
   def waitForPageToLoad(title, what='title')
     puts "waitForPageToLoad:('#{title}',#{what})"
