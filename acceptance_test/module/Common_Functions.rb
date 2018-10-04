@@ -91,5 +91,16 @@ module Functions
     end
   end
 
+  # Verify the field type ..
+  def getFieldType(fieldElement)
+    field = findElement(:css, fieldElement)
+    type = field.tag_name
+
+    if(type == "input")
+      type = field.attribute("type")
+    end
+    return type
+  end
+
 
 end
