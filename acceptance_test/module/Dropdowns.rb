@@ -62,8 +62,14 @@ module DropdownFunctions
     end
   end
 
-
-
+  # Select fild with loop
+  def dropdownOption(dropDownFIeld, tagname, text)
+    dropdown_list = @driver.find_element(:css, dropDownFIeld)
+    options = dropdown_list.find_elements(:tag_name, tagname)
+    options.each { |option| option.click if option.text == text }
+    selected_option = options.map { |option| option.text if option.selected? }.join
+    expect(selected_option.text).to eql text
+  end
 
 
 end
