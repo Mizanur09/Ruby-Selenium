@@ -2,3 +2,4 @@
 .idea/
 acceptance_test/.DS_Store
 Ruby-Selenium.iml
+Gemfile.lock
