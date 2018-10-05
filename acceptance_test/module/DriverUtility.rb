@@ -25,10 +25,10 @@ module DriverUtility
       # @driver = Selenium::WebDriver.for :safari
     end
     profile = Selenium::WebDriver::Firefox::Profile.new(@FIREFOX_PROFILE_PATH)
-    profile['browser.cache.disk.enable'] = false
-    profile['browser.cache.memory.enable'] = false
-    profile['browser.cache.offline.enable'] = false
-    profile['network.http.use-cache'] = false
+    # profile['browser.cache.disk.enable'] = false
+    # profile['browser.cache.memory.enable'] = false
+    # profile['browser.cache.offline.enable'] = false
+    # profile['network.http.use-cache'] = false
 
     @driver = Selenium::WebDriver.for :firefox, :profile => profile
     @driver.manage.window.maximize

@@ -102,5 +102,12 @@ module Functions
     return type
   end
 
+  #It will pull out the element color
+  def getElementColor(selector, cssvalue)
+    rgb = findElement(:css, selector).css_value(cssvalue).gsub(/rgba\(/,"").gsub(/\)/,"").split(",")
+    color = '#%02x%02x%02x' % [rgb[0], rgb[1], rgb[2]]
+    return color.upcase
+  end
+
 
 end
