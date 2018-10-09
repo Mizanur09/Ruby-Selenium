@@ -80,6 +80,28 @@ module MongoUtility
     return document
   end
 
+  # get last Document By User Identification Using Following information
+    # Collection Name
+    # DataBase Name
+    # Authority
+    # Unique Value
+    # Column name
+  def getLatestDocumentByUserIdentifier(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
+    @db = Mongo::Client.new([ HOSTANDPORT ],
+                            :user => dbName,
+                            :password => '1234',
+                            :database => dbName,
+                            :ssl => true,
+                            :connect_timeout => 20,
+                            :max_pool_size => 100,
+                            :ssl_verify => false)
+    document = @db[collectionName].find({"patientIdentifier.uniqueId" => uniqueIdValue,
+                                         "patientIdentifier.assigningAuthority"=> assigningAuthorityValue},
+                                        :fields => [columnName]).sort({'createdDate' => -1})
+
+    return document
+  end
+
 # Get Document/File By UniqueID
   # Collection Name
   # DataBase Name
@@ -94,6 +116,69 @@ module MongoUtility
                                         :fields => [columnName])
     return document
   end
+
+  # Verify Column Deleted by Providing following info
+    # Collection Name
+    # DataBase Name
+    # Object Id
+    # Column name
+  def verifyColumnDeleted(collectionName, dbName, objId, columnName)
+    document = getDocumentByObjId(collectionName, dbName, objId, columnName)
+    isDeleted = true
+    for record in document
+      if record[columnName] == false
+        isDeleted = false
+        break
+      end
+    end
+    puts "[Verify Column Is Deleted] objId: " + objId + " - columnName: " + columnName + " IsDeleted: " + isDeleted.to_s
+    return isDeleted
+  end
+
+  # Retrieve row by get Document using object ID
+    # This methods will bring out multiple row
+  def retrieveThisFieldInDocumentWithMultiRows(collectionName, dbName, objId, columnName)
+    document = getDocumentByObjId(collectionName, dbName, objId, columnName)
+    outPut = ""
+    document.each { |record|
+      puts record[columnName]
+      if record[columnName] != nil then
+        outPut = record[columnName] + ',' + outPut.to_s
+      else
+        output = "" + "," + output.to_s
+      end
+    }
+    puts "outPut=" + outPut.to_s
+    return outPut
+  end
+
+  def retrieveLatestRecordFieldInDocument(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
+    document = getLatestDocumentByUserIdentifier(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
+    for record in document
+      puts "record[" + columnName + "]=" + record[columnName].to_s
+      return record[columnName]
+    end
+  end
+
+  # Collect all the document from dataBase keep it in Array Using
+    # Collection Name
+    # DataBase name
+  def retreiveAllDocumentsInCollection(collectionName, dbName)
+    documentArray = []
+    @db = Mongo::Client.new([ HOSTANDPORT ], :database => dbName)
+    documents = @db[collectionName].find()
+    documents.each do | document |
+      documentArray << document
+    end
+    return documentArray
+  end
+
+
+
+
+
+
+
 
 
 end
