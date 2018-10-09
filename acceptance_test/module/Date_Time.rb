@@ -1,7 +1,7 @@
 require_relative '../Helpers_pages/globalized'
 include Globalized
 
-class DateSetup
+module DateSetup
 
 ##############################################   DATE  #############################################
   # Date set up
@@ -96,12 +96,12 @@ class DateSetup
 
   # Change the time Using Java script
   def selectTimeZone(timeZone)
-  #puts "Time Zone is " + timeZone
-  # *selectTimeZone("(-05:00) America/New_York (Eastern)")
-  Sleep 1
-  @driver.execute_script("$('[name=timeZone]').scope().preferences.timeZone = \"" + timeZone + "\"")
-  @driver.execute_script("$('[name=timeZone]').scope().$digest()")
-end
+    puts "Time Zone is " + timeZone
+    selectTimeZone("(-05:00) America/New_York (Eastern)")
+    Sleep 1
+    @driver.execute_script("$('[name=timeZone]').scope().preferences.timeZone = \"" + timeZone + "\"")
+    @driver.execute_script("$('[name=timeZone]').scope().$digest()")
+  end
 
   # Get local time.
   def getTodayInZeroTime
@@ -122,12 +122,5 @@ end
     a[2] = 0
     return Time.utc(*a)
   end
-
-
-
-
-
-
-
 
 end
