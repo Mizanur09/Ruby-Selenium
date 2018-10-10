@@ -47,6 +47,62 @@ module OracleDBUtility
     con.exec("COMMIT")
   end
 
+  def verifyFormIsSubmitted(userID)
+    assessmentRecordFound = false
+    con = OCI8.new(ORACLE_USER+"/"+ORACLE_DB_PASS+"@"+ORACLE_CON_STRING)
+    rs = con.exec("select user_ID, IN_PROGRESS from Form_result where User_ID='" + userID + "'")
+    if rs.nil? == false then
+      puts "Number of rows returned: " + rs.num_rows.to_s
+      while row = rs.fetch_hash do
+        if row["IN_PROGRESS"] == 0 then
+          assessmentRecordFound = true
+        end
+      end
+    else
+      puts "No assessment was created by " + userID
+      assessmentRecordFound = false
+    end
+    con.exec("COMMIT")
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 end
