@@ -12,7 +12,7 @@ module OracleDBUtility
 
   # Pull User Date of birth using
     # User ID  
-  def getPatientDOB(uniqueId)
+  def getUserDOB(uniqueId)
     con = OCI8.new(ORACLE_USER+"/"+ORACLE_DB_PASS+"@"+ORACLE_CON_STRING)
     queryStr = "SELECT MOCK_DOB FROM MOCKDB.MOCK_USERS where UNIQUE_ID='" +uniqueId+ "'"
     puts queryStr
@@ -29,6 +29,23 @@ module OracleDBUtility
     con.exec("COMMIT")
   end
 
+  def verifyFormIsSavedAsDraft(userID)
+    assessmentRecordFound = false
+    con = OCI8.new(ORACLE_USER+"/"+ORACLE_DB_PASS+"@"+ORACLE_CON_STRING)
+    rs = con.exec("select user_ID, IN_PROGRESS from Form_result where User_ID='" + userID + "'")
+    if rs.nil? == false then
+      puts "Number of rows returned: " + rs.num_rows.to_s
+      while row = rs.fetch_hash do
+        if row["IN_PROGRESS"] == 1 then
+          assessmentRecordFound = true
+        end
+      end
+    else
+      puts "No form was created by " + userID
+      assessmentRecordFound = false
+    end
+    con.exec("COMMIT")
+  end
 
 
 
