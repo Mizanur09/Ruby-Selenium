@@ -10,7 +10,36 @@ module DriverUtility
   $LOCAL ='https://provide the URL of Local environment'
   $REMOTE = 'https://provide the URL of Remote environment'
 
+  # $driver_path = '~//Users\M\Desktop\My Files\Apps/'
+  $driver_path = 'Add the driver exe path'
 
+  def start_FireFox
+    # Add gecko driver when its selenium 3.0 ++
+    @driver = Selenium::WebDriver.for :Firefox
+  end
+
+  def start_MicrosoftEge
+    #edge_path = File.join(File.Absolute_path($driver_path, File.dirname(__FILE__)),"MicrosoftEdge", "Microsoft_Edge.exe")
+    edge_path = File.join(File.Absolute_path($driver_path, File.dirname(__FILE__)),"Directory name", "DriverName.exe")
+    Selenium::WebDriver::Edge.driver_path = edge_path
+    @driver = Selenium::WebDriver.for :edge 
+  end
+
+  def start_IE
+    IE_path = File.join(File.Absolute_path($driver_path, File.dirname(__FILE__)),"Directory_Name", "Driver_Name.exe")
+    Selenium::WebDriver::IE.driver_path = IE_path
+    @driver = Selenium::WebDriver.for :ie
+  end
+
+  def start_chrome
+    chrome_path = File.join(File.Absolute_path($driver_path, File.dirname(__FILE__)),"Directory_Name", "Driver_Name.exe")
+    Selenium::WebDriver::Chrome::Service.driver_path = chrome_path #Service must be added in order to lounch the chrome browser.
+    @driver = Selenium::WebDriver.for Chrome
+  end
+
+  def start_safari
+    # I will add Safari browser information very soon.     
+  end
 
   def initializeConfigurations(base_url = $LOCAL) # change the environment according to where the test need to be run. Example if you like to run into remote environment then base_url = $Remote
     if base_url == $REMOTE
