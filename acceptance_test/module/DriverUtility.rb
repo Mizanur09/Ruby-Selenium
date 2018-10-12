@@ -9,10 +9,15 @@ module DriverUtility
   $DEMO = 'https://provide the URL of Demo environment'
   $LOCAL ='https://provide the URL of Local environment'
   $REMOTE = 'https://provide the URL of Remote environment'
+  SELENIUM_HUB = 'http://localhost:4444/wd/hub' 
 
   # $driver_path = '~//Users\M\Desktop\My Files\Apps/'
   $driver_path = 'Add the driver exe path'
 
+########################################################################################################################
+################################ REGULER BROWSERs ######################################################################
+########################################################################################################################
+  
   def start_FireFox
     # Add gecko driver when its selenium 3.0 ++
     @driver = Selenium::WebDriver.for :Firefox
@@ -41,32 +46,34 @@ module DriverUtility
     # I will add Safari browser information very soon.     
   end
 
-  def initializeConfigurations(base_url = $LOCAL) # change the environment according to where the test need to be run. Example if you like to run into remote environment then base_url = $Remote
-    if base_url == $REMOTE
-      browserCapabilities = Selenium::WebDriver::Remote::Capabilities.firefox(accept_insecure_certs: true)
+########################################################################################################################
+###############REMOTE BROWSERs #########################################################################################
+########################################################################################################################
+  
+  def start_remote_Firefox
+    browserCapabilities = Selenium::WebDriver::Remote::Capabilities.firefox(accept_insecure_certs: true)
       @driver = Selenium::WebDriver.for(:remote,
-                                        url: 'http://localhost:4444/wd/hub',
+                                        url: SELENIUM_HUB,
                                         desired_capabilities: browserCapabilities)
-    elsif base_url == $LOCAL
+  end
 
-      # Selenium::WebDriver::Chrome.driver_path='path of the chrome.exe'
-      # @driver = Selenium::WebDriver.for :chrome
-      # @driver = Selenium::WebDriver.for :safari
-    end
-    profile = Selenium::WebDriver::Firefox::Profile.new(@FIREFOX_PROFILE_PATH)
-    # profile['browser.cache.disk.enable'] = false
-    # profile['browser.cache.memory.enable'] = false
-    # profile['browser.cache.offline.enable'] = false
-    # profile['network.http.use-cache'] = false
-
-    @driver = Selenium::WebDriver.for :firefox, :profile => profile
+  def browserfinalization (base_url)
     @driver.manage.window.maximize
-    @driver.manage.timeouts.page_load = IMPLICIT_WAIT_FOR_WEB_ELEMENT_DEFAULT
-    @driver.manage.timeouts.implicit_wait = IMPLICIT_WAIT_FOR_WEB_ELEMENT_DEFAULT
+    @driver.manage.timeouts.page_load = 15
+    @driver.manage.timeouts.implicit_wait = 15
     @driver.manage.delete_all_cookies
     @driver.get(base_url)
     @accept_next_alert = true
     @verification_errors = []
+  end
+
+  def initializeConfigurations(base_url = $LOCAL) # change the environment according to where the test need to be run. Example if you like to run into remote environment then base_url = $Remote
+    if base_url == $REMOTE
+      start_remote_Firefox
+    elsif base_url == $LOCAL
+      start_chrome
+    end
+      browserfinalization
   end
 
   def quitDriver()
