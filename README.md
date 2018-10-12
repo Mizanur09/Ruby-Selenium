@@ -7,14 +7,32 @@
 # Ruby install from Terminal
 	* Open terminal 
 		* gem install ruby
-	* Navigate to your project using terminal
+	* Navigate to your project using terminal/ Command line prompts
 		* cd Desktop/Ruby-selenium/
 	* Create Gemfile and add dependencies as follows 
 		* add source source 'https://rubygems.org'
 		* gem 'nokogiri'
+		* gem 'data_magic'
 		* gem 'selenium-webdriver', '~>2.53.0'
 		* gem 'rspec', '~> 2.14.1'
-		* gem 'allure-rspec', '~> 0.5.0
+		* gem 'rspec-expectations', '~> 2.14.5'
+		* gem 'rspec_junit_formatter', '~> 0.2.0'
+		* gem 'test-unit', '~> 3.0.9'
+		* gem 'debugger-linecache', '~> 1.2.0'
+		* gem 'ci_reporter', '~> 2.0.0'
+		* gem 'json'
+		* gem 'activesupport', '~> 4.2.0'
+		* gem 'i18n', '~> 0.7.0'
+		* gem 'ruby-jquery', '~> 0.0.1'
+		* gem 'bson', '~> 4.3.0'
+		* gem 'mongo','~> 2.4.1'
+		* gem 'bson_ext', '~> 1.5.1'
+		* gem 'mongo-import'
+		* gem 'compass', '~> 1.0.3'
+		* gem 'require_all'
+		* gem 'allure-rspec', '~> 0.5.0'
+		* gem 'uuid'
+		* gem 'mimemagic'
 # Run installation 
 		* gem install bundler
 		* gem install bundle
