@@ -1,11 +1,7 @@
-require 'active_support/time'
-require 'rubygems'
-require "json"
-require 'selenium-webdriver'
+require_relative 'helper_page'
 
 module DriverUtility
-  FIREFOX_PROFILE_PATH = File.expand_path('.') + '/acceptance_test/selenium-ruby/firefoxProfile'
-
+ 
   $DEMO = 'https://provide the URL of Demo environment'
   $LOCAL ='https://provide the URL of Local environment'
   $REMOTE = 'https://provide the URL of Remote environment'
