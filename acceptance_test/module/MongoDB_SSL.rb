@@ -39,5 +39,13 @@ module MongoUtilitySSL
     end
   end
 
+  def printAllCollections
+    Connection.database_names.each do |name|
+      db = Connection.use(name)
+      db.Connection.each do |collection|
+        puts "#{name} - #{collection.name}"
+      end
+    end
+  end
 
 end
