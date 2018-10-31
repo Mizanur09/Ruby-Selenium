@@ -48,4 +48,14 @@ module MongoUtilitySSL
     end
   end
 
+  def removeCollection(collectionName, dbName)
+    @db = Mongo::Client.new([ HOSTANDPORT ],
+                            :user => dbName, :password => PASSWORD,
+                            :database => dbName, :ssl => true,
+                            :connect_timeout => CONNECT_TIMEOUT,
+                            :max_pool_size => MAX_POOL_SIZE, :ssl_verify => false)
+    @db[collectionName].drop
+    puts "removed All documents for " + collectionName
+  end
+
 end
