@@ -22,7 +22,22 @@ module MongoUtilitySSL
 
 
 
-
+  def Create_Database_Users
+    Connection.database_names.each do |name|
+      db = Connection.use(name)
+      begin
+        db.command({
+                       'createUser' => name,
+                       'pwd' => PASSWORD,
+                       'roles' => [
+                           { 'role' => 'dbOwner', 'db' => name }
+                       ]
+                   })
+          rescue => e
+            puts 'Error Creating User: ' + e.to_s
+      end
+    end
+  end
 
 
 end
