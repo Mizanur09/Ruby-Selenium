@@ -137,9 +137,15 @@ module MongoUtilitySSL
     }
     puts "outPut= " + outPut.to_s
     return outPut
-
   end
 
+  def retrieveLatestRecordFieldInDocument(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
+    document = getLatestDocumentByUserIdentifier(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
+    for record in document
+      puts "record[" + columnName + "]=" + record[columnName].to_s
+      return record[columnName]
+    end
+  end
 
 
 
