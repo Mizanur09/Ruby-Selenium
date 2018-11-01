@@ -58,16 +58,22 @@ module MongoUtilitySSL
   end
 
   def removeCollection(collectionName, dbName)
-    Update_given_dataBase(dbName)
+    @db = Update_given_dataBase(dbName)
     @db[collectionName].drop
     puts "removed All documents for " + collectionName
   end
 
   def updateDocument(collectionName, dbName, objId, columnName, value)
-    Update_given_dataBase(dbName)
+    @db = Update_given_dataBase(dbName)
     documents = @db[collectionName]
     documents.update_one({:_id => BSON::ObjectId(objId)},
                          {"$set" => {columnName => value}})
+  end
+
+  def removeDocumentByObjectId(collectionName, dbName, objId)
+    @db = Update_given_dataBase(dbName)
+    documents = @db[collectionName]
+    documents.remove({:_id => BSON::ObjectId(objId)})
   end
 
 end
