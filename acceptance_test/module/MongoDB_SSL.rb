@@ -110,9 +110,21 @@ module MongoUtilitySSL
     return document
   end
 
+  def verifyColumnDeleted(collectionName, dbName, objId, columnName)
+    document = getDocumentByObjId(collectionName, dbName, objId, columnName)
+    isDeleted = true
+    for record in document
+      if record[columnName] == false
+        isDeleted = false
+        break
+      end
+    end
+    puts "[verifyNotificationDeleted ] objId: " + objId + " - columnName: " + columnName + " IsDeleted: " + isDeleted.to_s
+    return isDeleted
+  end
 
 
-
+  
 
 
 
