@@ -57,6 +57,16 @@ module MongoUtilitySSL
     end
   end
 
+  def insertCollection(collectionName, dbName, fileName)
+    system('mongoimport --host 10.0.0.0:12121 --username ' +
+               dbName + ' --password 1234 --db ' +
+               dbName + ' --collection '+
+               collectionName + ' --ssl --sslAllowInvalidCertificates --type json --file '+
+               Dir.pwd + '/spec/snapshots/' +
+               fileName + '.json')
+    puts "[insertCollection] imported Collection " + collectionName
+  end
+
   def removeCollection(collectionName, dbName)
     @db = Update_given_dataBase(dbName)
     @db[collectionName].drop
@@ -75,5 +85,7 @@ module MongoUtilitySSL
     documents = @db[collectionName]
     documents.remove({:_id => BSON::ObjectId(objId)})
   end
+
+
 
 end
