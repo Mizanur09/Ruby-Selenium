@@ -124,7 +124,21 @@ module MongoUtilitySSL
   end
 
 
-  
+  def retrieveThisFieldInDocumentWithMultiRows(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
+    document = getDocumentByUserIdentifier(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
+    outPut = ""
+    document.each { |record|
+      puts record[columnName] + '####'
+      if record[columnName] != nil then
+        outPut = record[columnName] + ',' + outPut.to_s
+      else
+        output = "" + "," + output.to_s
+      end
+    }
+    puts "outPut= " + outPut.to_s
+    return outPut
+
+  end
 
 
 
