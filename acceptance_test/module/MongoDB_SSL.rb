@@ -147,6 +147,15 @@ module MongoUtilitySSL
     end
   end
 
+  def retreiveAllDocumentsInCollection(collectionName, dbName)
+    documentArray = []
+    @db = Update_given_dataBase(dbName)
+    documents = @db[collectionName].find()
+    documents.each do | document |
+      documentArray << document
+    end
+    return documentArray
+  end
 
 
 
