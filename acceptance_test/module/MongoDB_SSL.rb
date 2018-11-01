@@ -20,8 +20,6 @@ module MongoUtilitySSL
                                  :max_pool_size => MAX_POOL_SIZE,
                                  :ssl_verify => false)
 
-
-
   def Create_Database_Users
     Connection.database_names.each do |name|
       db = Connection.use(name)
@@ -39,6 +37,17 @@ module MongoUtilitySSL
     end
   end
 
+  def Update_given_dataBase(dbName)
+    Mongo::Client.new([ HOSTANDPORT ],
+                      :user => dbName,
+                      :password => PASSWORD,
+                      :database => dbName,
+                      :ssl => true,
+                      :connect_timeout => CONNECT_TIMEOUT,
+                      :max_pool_size => MAX_POOL_SIZE,
+                      :ssl_verify => false)
+  end
+
   def printAllCollections
     Connection.database_names.each do |name|
       db = Connection.use(name)
@@ -49,13 +58,16 @@ module MongoUtilitySSL
   end
 
   def removeCollection(collectionName, dbName)
-    @db = Mongo::Client.new([ HOSTANDPORT ],
-                            :user => dbName, :password => PASSWORD,
-                            :database => dbName, :ssl => true,
-                            :connect_timeout => CONNECT_TIMEOUT,
-                            :max_pool_size => MAX_POOL_SIZE, :ssl_verify => false)
+    Update_given_dataBase(dbName)
     @db[collectionName].drop
     puts "removed All documents for " + collectionName
+  end
+
+  def updateDocument(collectionName, dbName, objId, columnName, value)
+    Update_given_dataBase(dbName)
+    documents = @db[collectionName]
+    documents.update_one({:_id => BSON::ObjectId(objId)},
+                         {"$set" => {columnName => value}})
   end
 
 end
