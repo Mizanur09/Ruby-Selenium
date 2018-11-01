@@ -95,8 +95,8 @@ module MongoUtility
                             :connect_timeout => 20,
                             :max_pool_size => 100,
                             :ssl_verify => false)
-    document = @db[collectionName].find({"patientIdentifier.uniqueId" => uniqueIdValue,
-                                         "patientIdentifier.assigningAuthority"=> assigningAuthorityValue},
+    document = @db[collectionName].find({"UserIdentifier.uniqueId" => uniqueIdValue,
+                                         "UserIdentifier.assigningAuthority"=> assigningAuthorityValue},
                                         :fields => [columnName]).sort({'createdDate' => -1})
 
     return document

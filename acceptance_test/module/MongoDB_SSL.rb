@@ -94,6 +94,14 @@ module MongoUtilitySSL
     return document
   end
 
+  def getLatestDocumentByUserIdentifier(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
+    @db = Update_given_dataBase(dbName)
+    document = @db[collectionName].find({"UserIdentifier.uniqueId" => uniqueIdValue,
+                                         "UserIdentifier.assigningAuthority"=> assigningAuthorityValue},
+                                        :fields => [columnName]).sort({'createdDate' => -1})
+    return document
+  end
+
   def getDocumentByUserIdentifier(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
     @db = Update_given_dataBase(dbName)
     document = @db[collectionName].find({"UserIdentifier.uniqueId" => uniqueIdValue,
