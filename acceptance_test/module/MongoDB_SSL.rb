@@ -86,6 +86,21 @@ module MongoUtilitySSL
     documents.remove({:_id => BSON::ObjectId(objId)})
   end
 
+  def getDocumentByObjId(collectionName, dbName, objId, columnName)
+    @db = Update_given_dataBase(dbName)
+    document = @db[collectionName].find({:_id => BSON::ObjectId(objId)},
+                                        :fields => [columnName]).to_a
+    puts "[getDocumentByObjId ] " + document.to_s
+    return document
+  end
+
+
+
+
+
+
+
+
 
 
 end
