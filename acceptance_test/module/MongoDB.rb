@@ -108,11 +108,11 @@ module MongoUtility
   # Assigning Authority Value
   # Unique Id Value
   # ColumnName
-  def getDocumentByPatientIdentifier(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
+  def getDocumentByUserIdentifier(collectionName, dbName, assigningAuthorityValue, uniqueIdValue, columnName)
     @db = Mongo::Client.new([ HOSTANDPORT ],
                             :database => dbName)
-    document = @db[collectionName].find({"patientIdentifier.uniqueId" => uniqueIdValue,
-                                         "patientIdentifier.assigningAuthority"=> assigningAuthorityValue},
+    document = @db[collectionName].find({"UserIdentifier.uniqueId" => uniqueIdValue,
+                                         "UserIdentifier.assigningAuthority"=> assigningAuthorityValue},
                                         :fields => [columnName])
     return document
   end
