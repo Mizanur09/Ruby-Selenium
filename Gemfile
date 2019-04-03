@@ -22,5 +22,7 @@ gem 'require_all'
 gem 'allure-rspec', '~> 0.5.0'
 gem 'uuid'
 gem 'mimemagic'
+gem 'mysql'
+gem 'oci8'
 
 # Note : anything with ~> sign will update as you do bundle update.
